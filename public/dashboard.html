@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>Dar Aryan Real Estate - Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>لوحة التحكم</h1>
+    <button id="logout">خروج</button>
+    <h2>إحصائيات</h2>
+    <div id="stats">
+      <!-- Stats will be loaded here -->
+    </div>
+    <h2>العقارات</h2>
+    <ul id="propertiesList"></ul>
+    <h2>إضافة عقار جديد</h2>
+    <form id="addPropertyForm">
+      <!-- Form fields for property, based on plan -->
+      <select id="type" required>
+        <option value="">نوع العقار</option>
+        <option value="apartment">شقة</option>
+        <option value="house">بيت</option>
+        <!-- Add all types -->
+      </select>
+      <input type="text" id="region" placeholder="المنطقة" required>
+      <!-- Add other fields like address, status, etc. -->
+      <button type="submit">إضافة</button>
+    </form>
+    <!-- Add sections for clients, appointments, expenses, tasks -->
+  </div>
+  <script src="dashboard.js"></script>
+</body>
+</html>
