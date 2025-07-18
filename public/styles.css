@@ -1,0 +1,9 @@
+body { font-family: Arial, sans-serif; direction: rtl; background: #001F3F; color: #FFFFFF; }
+.container { max-width: 800px; margin: 0 auto; padding: 20px; background: #001F3F; border-radius: 8px; }
+h1, h2 { text-align: center; color: #C0C0C0; }
+form { display: flex; flex-direction: column; }
+input, select, textarea, button { margin: 10px 0; padding: 10px; background: #FFFFFF; color: #001F3F; border: 1px solid #C0C0C0; }
+button { background: #C0C0C0; color: #001F3F; cursor: pointer; }
+ul { list-style: none; padding: 0; }
+li { background: #C0C0C0; margin: 10px 0; padding: 10px; border-radius: 4px; color: #001F3F; }
+a { color: #FFFFFF; text-decoration: none; }
