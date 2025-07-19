@@ -29,7 +29,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Deploy to App Engine
-        run: gcloud app deploy --project your-project-id --quiet
+        run: gcloud app deploy --project dararyan-internal --quiet
 
       - name: Test deployment
         run: curl "https://dararyan-realty-project.appspot.com"
