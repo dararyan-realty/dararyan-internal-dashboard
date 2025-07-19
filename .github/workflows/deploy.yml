@@ -32,7 +32,7 @@ jobs:
         run: gcloud app create --region=europe-west1 --project dararyan-internal || true
 
       - name: Deploy to App Engine
-        run: gcloud app deploy --project dararyan-internal --quiet --region=europe-west1
+        run: gcloud app deploy --project dararyan-internal --quiet
 
       - name: Test deployment
         run: curl "https://dararyan-internal.appspot.com"
