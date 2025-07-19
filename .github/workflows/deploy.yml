@@ -32,4 +32,4 @@ jobs:
         run: gcloud app deploy --project dararyan-internal --quiet
 
       - name: Test deployment
-        run: curl "https://dararyan-realty-project.appspot.com"
+        run: curl "https://dararyan-internal.appspot.com"
