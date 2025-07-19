@@ -28,8 +28,11 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
+      - name: Create App Engine Application if not exists
+        run: gcloud app create --region=europe-west1 --project dararyan-internal || true
+
       - name: Deploy to App Engine
-        run: gcloud app deploy --project dararyan-internal --quiet
+        run: gcloud app deploy --project dararyan-internal --quiet --region=europe-west1
 
       - name: Test deployment
         run: curl "https://dararyan-internal.appspot.com"
