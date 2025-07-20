@@ -1,6 +1,16 @@
 const token = localStorage.getItem('token');
 if (!token) window.location.href = 'index.html';
 
+async function fetchStats() {
+  try {
+    const res = await fetch('/api/stats', { headers: { 'Authorization': `Bearer ${token}` } });
+    const stats = await res.json();
+    document.getElementById('stats').innerHTML = `<p>عدد العقارات: ${stats.propertiesCount}</p><p>عدد العملاء: ${stats.clientsCount}</p><p>عدد المواعيد: ${stats.appointmentsCount}</p>`;
+  } catch (err) {
+    alert('خطأ في الإحصائيات: ' + err.message);
+  }
+}
+
 async function fetchProperties() {
   try {
     const res = await fetch('/api/properties', {
@@ -18,18 +28,6 @@ async function fetchProperties() {
     alert('خطأ: ' + err.message);
   }
 }
-
-async function fetchStats() {
-  try {
-    const res = await fetch('/api/stats', { headers: { 'Authorization': `Bearer ${token}` } }); // Assume a stats route
-    const stats = await res.json();
-    document.getElementById('stats').innerHTML = `<p>عدد العروض: ${stats.offers}</p><p>عدد الطلبات: ${stats.requests}</p>`;
-  } catch (err) {
-    alert('خطأ: ' + err.message);
-  }
-}
-
-// Similar functions for properties, clients, etc.
 
 document.getElementById('addPropertyForm').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -139,7 +137,7 @@ document.getElementById('logout').addEventListener('click', () => {
   window.location.href = 'index.html';
 });
 
-fetchProperties();
 fetchStats();
+fetchProperties();
 fetchClients();
 fetchAppointments();
