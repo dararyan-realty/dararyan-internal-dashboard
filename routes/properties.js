@@ -17,7 +17,8 @@ const authMiddleware = (req, res, next) => {
 
 router.get('/', authMiddleware, async (req, res) => {
   try {
-    const properties = await Property.find();
+    const filters = req.query; // Supports filtering like ?type=apartment®ion=hawalli&price[gte]=100000
+    const properties = await Property.find(filters);
     res.json(properties);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -34,6 +35,24 @@ router.post('/', authMiddleware, async (req, res) => {
   }
 });
 
-// Add put for edit, delete, archive, etc.
+router.put('/:id', authMiddleware, async (req, res) => {
+  try {
+    const property = await Property.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!property) return res.status(404).json({ error: 'Not found' });
+    res.json(property);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+router.delete('/:id', authMiddleware, async (req, res) => {
+  try {
+    const property = await Property.findByIdAndDelete(req.params.id);
+    if (!property) return res.status(404).json({ error: 'Not found' });
+    res.json({ message: 'Deleted' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 module.exports = router;
