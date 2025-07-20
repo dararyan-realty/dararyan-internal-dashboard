@@ -15,6 +15,11 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
+const adminMiddleware = (req, res, next) => {
+  if (req.user.role !== 'admin') return res.status(403).json({ error: 'Admin access required' });
+  next();
+};
+
 router.get('/', authMiddleware, async (req, res) => {
   try {
     const filters = req.query; // Supports filtering like ?type=apartment®ion=hawalli&price[gte]=100000
@@ -52,6 +57,16 @@ router.delete('/:id', authMiddleware, async (req, res) => {
     res.json({ message: 'Deleted' });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+router.put('/:id/archive', authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    const property = await Property.findByIdAndUpdate(req.params.id, { archived: true }, { new: true });
+    if (!property) return res.status(404).json({ error: 'Not found' });
+    res.json(property);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 });
 
